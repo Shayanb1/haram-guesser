@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Haram or Not?</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Loading overlay -->
+  <div id="loading" class="loading hidden">
+    <div class="spinner"></div>
+    <p id="loading-text">Thinking...</p>
+  </div>
+
+  <!-- API Key Screen -->
+  <div id="screen-apikey" class="screen">
+    <div class="card center-card">
+      <h1 class="logo">حرام<span class="or">or not?</span></h1>
+      <p class="subtitle">Enter your Anthropic API key to play.<br/>It's stored only in your browser.</p>
+      <div class="field">
+        <input type="password" id="apikey-input" placeholder="sk-ant-api03-..." autocomplete="off" />
+      </div>
+      <button class="btn btn-primary" id="apikey-submit">Start Playing →</button>
+      <p class="hint">Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></p>
+    </div>
+  </div>
+
+  <!-- Main Menu Screen -->
+  <div id="screen-menu" class="screen hidden">
+    <div class="card center-card">
+      <h1 class="logo">حرام<span class="or">or not?</span></h1>
+      <p class="subtitle">A word guessing game with a twist.</p>
+      <div class="menu-buttons">
+        <button class="btn btn-primary" id="menu-pvc">▶  Player vs Computer</button>
+        <button class="btn btn-disabled" disabled>⏳  Player vs Player — Coming Soon</button>
+      </div>
+      <button class="btn btn-ghost" id="menu-change-key">Change API Key</button>
+    </div>
+  </div>
+
+  <!-- Setup Screen: pick your word -->
+  <div id="screen-setup" class="screen hidden">
+    <div class="card wide-card">
+      <h2>Pick your secret word</h2>
+      <p class="subtitle">The computer will try to guess it. Click a word to choose.</p>
+      <div id="word-grid"></div>
+      <p class="hint selected-hint hidden">Selected: <strong id="selected-word-display"></strong></p>
+      <button class="btn btn-primary hidden" id="setup-confirm">Let's Play →</button>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="screen-game" class="screen hidden">
+    <div class="game-layout">
+
+      <div class="game-header">
+        <div class="word-badge computer-badge">
+          <span class="badge-label">Computer</span>
+          <span class="badge-word" id="computer-word-display">???</span>
+        </div>
+        <div class="turn-indicator" id="turn-indicator">Your Turn</div>
+        <div class="word-badge player-badge">
+          <span class="badge-label">You</span>
+          <span class="badge-word" id="player-word-display"></span>
+        </div>
+      </div>
+
+      <div class="log-container" id="log-container">
+        <div class="log-empty" id="log-empty">No questions asked yet. You go first!</div>
+      </div>
+
+      <div class="game-input" id="game-input-area">
+        <div class="input-section">
+          <label class="input-label">Ask a yes/no question</label>
+          <div class="input-row">
+            <input type="text" id="question-input" placeholder="Is it something you eat?" />
+            <button class="btn btn-primary" id="ask-btn">Ask</button>
+          </div>
+        </div>
+        <div class="divider-or">— or —</div>
+        <div class="input-section">
+          <label class="input-label">Guess the word</label>
+          <div class="input-row">
+            <select id="guess-select"></select>
+            <button class="btn btn-accent" id="guess-btn">Guess!</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Result Screen -->
+  <div id="screen-result" class="screen hidden">
+    <div class="card center-card">
+      <div id="result-icon" class="result-icon"></div>
+      <h2 id="result-title"></h2>
+      <p id="result-body" class="subtitle"></p>
+      <div class="result-reveal">
+        <div class="reveal-box">
+          <span class="reveal-label">Computer's word was</span>
+          <span class="reveal-word" id="reveal-computer"></span>
+        </div>
+        <div class="reveal-box">
+          <span class="reveal-label">Your word was</span>
+          <span class="reveal-word" id="reveal-player"></span>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="play-again-btn">Play Again</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
